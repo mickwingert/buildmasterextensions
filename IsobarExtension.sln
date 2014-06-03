@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsobarExtension", "IsobarExtension\IsobarExtension.csproj", "{D822A85A-CBB6-4B24-9FCD-DFA4873D6173}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{C84DE034-2B7D-4C38-A0A5-7C6F673E03C2}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\Why Not NuGet.txt = Lib\Why Not NuGet.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildMasterSDK", "BuildMasterSDK", "{37DF6EA4-478D-497C-A5EC-7A8CDDC5601E}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\BuildMasterSDK\BuildMaster.Web.Controls.dll = Lib\BuildMasterSDK\BuildMaster.Web.Controls.dll
+		Lib\BuildMasterSDK\BuildMasterCore.dll = Lib\BuildMasterSDK\BuildMasterCore.dll
+		Lib\BuildMasterSDK\BuildMasterCore.xml = Lib\BuildMasterSDK\BuildMasterCore.xml
+		Lib\BuildMasterSDK\ICSharpCode.SharpZipLib.dll = Lib\BuildMasterSDK\ICSharpCode.SharpZipLib.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D822A85A-CBB6-4B24-9FCD-DFA4873D6173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D822A85A-CBB6-4B24-9FCD-DFA4873D6173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D822A85A-CBB6-4B24-9FCD-DFA4873D6173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D822A85A-CBB6-4B24-9FCD-DFA4873D6173}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{37DF6EA4-478D-497C-A5EC-7A8CDDC5601E} = {C84DE034-2B7D-4C38-A0A5-7C6F673E03C2}
+	EndGlobalSection
+EndGlobal

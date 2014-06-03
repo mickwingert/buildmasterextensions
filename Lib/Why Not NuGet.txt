@@ -1,0 +1,11 @@
+"Why do you have a /lib folder instead of using NuGet?"
+
+Although NuGet is becoming the mainstream dependency manager for .NET, it's 
+not mainstream yet, especially for corporate/enterprise environments. We
+wanted to make this starter project as accessible as possible.
+
+To convert this project to use NuGet, simply delete the lib folder, delete
+the project references, and then add the BuildMasterSDK package from NuGet.
+
+P.S. Did you know we have a pretty cool private NuGet server/repository 
+     called ProGet? Check it out at http://inedo.com/proget
