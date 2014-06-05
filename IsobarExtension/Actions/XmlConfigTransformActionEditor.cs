@@ -16,6 +16,16 @@ namespace IsobarExtension.Actions
         private CheckBox _preservceWhiteSpace;
         private CheckBox _verbose;
 
+        public override bool DisplaySourceDirectory
+        {
+            get { return true; }
+        }
+
+        public override bool DisplayTargetDirectory
+        {
+            get { return true; }
+        }
+
         public override void BindToForm(Inedo.BuildMaster.Extensibility.Actions.ActionBase extension)
         {
             var action = (XmlConfigTransformAction)extension;
