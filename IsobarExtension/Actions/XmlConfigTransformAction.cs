@@ -35,7 +35,7 @@ namespace IsobarExtension.Actions
         /// Gets or sets a value indicating whether verbose logging should be enabled.
         /// </summary>
         [Persistent]
-        public bool Verbose { get; set; } 
+        public bool Verbose { get; set; }
         #endregion
 
         #region Public Methods
@@ -76,7 +76,7 @@ namespace IsobarExtension.Actions
         public override string ToString()
         {
             return "Apply config transforms on remote agent.";
-        } 
+        }
         #endregion
 
         #region Private Methods
@@ -122,6 +122,9 @@ namespace IsobarExtension.Actions
         /// <returns>An argument string</returns>
         private string BuildArguments(string sourceFile, string transformFile)
         {
+
+            LogDebug("Target Directory: " + Context.TargetDirectory);
+
             var buffer = new StringBuilder();
             buffer.AppendFormat("source:\"{0}\"", Path.Combine(Context.SourceDirectory, sourceFile));
             buffer.AppendFormat(" transform:\"{0}\"", Path.Combine(Context.SourceDirectory, transformFile));
@@ -179,7 +182,7 @@ namespace IsobarExtension.Actions
                  where s.Length > 0
                  select s)
                     .ToArray<string>();
-        } 
+        }
         #endregion
     }
 }
