@@ -104,12 +104,8 @@ namespace IsobarExtension.Actions
                 if (!fileOps.FileExists(transformExePath))
                     throw new FileNotFoundException("ctt.exe could not be found on the agent.", transformExePath);
 
-                // Strip out the source directory location so that our BuildArguments is directory independent
-                var relativeSourceFilePath = sourceFile.Replace(Context.SourceDirectory, "");
-                var relativeTransformFilePath = transformFile.Replace(Context.SourceDirectory, "");
-
                 // Get all the arguments that form the executable transform task
-                var arguments = BuildArguments(relativeSourceFilePath, relativeTransformFilePath);
+                var arguments = BuildArguments(sourceFile, transformFile);
 
                 LogInformation("Performing XDT transform...");
 
@@ -126,12 +122,13 @@ namespace IsobarExtension.Actions
         /// <returns>An argument string</returns>
         private string BuildArguments(string sourceFile, string transformFile)
         {
+            LogDebug("Sourec Directory: " + Context.SourceDirectory);
             LogDebug("Target Directory: " + Context.TargetDirectory);
 
             var buffer = new StringBuilder();
-            buffer.AppendFormat("source:\"{0}\"", Path.Combine(Context.SourceDirectory, sourceFile));
-            buffer.AppendFormat(" transform:\"{0}\"", Path.Combine(Context.SourceDirectory, transformFile));
-            buffer.AppendFormat(" destination:\"{0}\"", Path.Combine(Context.TargetDirectory, sourceFile));
+            buffer.AppendFormat("source:\"{0}\"", sourceFile);
+            buffer.AppendFormat(" transform:\"{0}\"", transformFile);
+            buffer.AppendFormat(" destination:\"{0}\"", sourceFile.Replace(Context.SourceDirectory, Context.TargetDirectory));
             buffer.Append(" indent");
 
             if (PreserveWhitespace)
