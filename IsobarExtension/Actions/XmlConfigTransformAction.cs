@@ -6,13 +6,15 @@ using System.Text;
 using Inedo.BuildMaster;
 using Inedo.BuildMaster.Extensibility.Actions;
 using Inedo.BuildMaster.Extensibility.Agents;
+using Inedo.BuildMaster.Web;
 
 namespace IsobarExtension.Actions
 {
     [ActionProperties(
         "Configuration Transforms",
-        "Automatically run configuration transformation files")]
-    [Tag("sample")]
+        "Automatically run configuration transformations on all *.config files")]
+    [Tag("configuration-files, Isobar")]
+    [CustomEditor(typeof(XmlConfigTransformActionEditor))]
     public class XmlConfigTransformAction : AgentBasedActionBase
     {
         [Persistent]
@@ -39,13 +41,25 @@ namespace IsobarExtension.Actions
             // of services provided by an agent
             var fileOps = this.Context.Agent.GetService<IFileOperationsExecuter>();
 
+            LogInformation("Looking for any configuration transform files...");
+
             var configFiles = EnumerateFilesRecursively(Context.SourceDirectory, new string[] { "*.config" });
 
             foreach (var configSourceFile in configFiles)
             {
                 var alreadyRun = new HashSet<string>();
 
-                ApplyConfigTransform(configSourceFile, "Release", fileOps, alreadyRun);
+                ApplyConfigTransforms(configSourceFile, "Release", fileOps, alreadyRun);
+
+                if (!String.IsNullOrWhiteSpace(EnvironmentSuffix))
+                {
+                    ApplyConfigTransforms(configSourceFile, EnvironmentSuffix, fileOps, alreadyRun);
+                }
+
+                foreach (var suffix in GetSuffixes(AdditionalTransforms))
+                {
+                    ApplyConfigTransforms(configSourceFile, suffix, fileOps, alreadyRun);
+                }
             }
         }
 
@@ -54,7 +68,7 @@ namespace IsobarExtension.Actions
             return "Writes all variables to variables.txt in the default directory on the remote agent.";
         }
 
-        private void ApplyConfigTransform(string sourceFile, string suffix, IFileOperationsExecuter fileOps,
+        private void ApplyConfigTransforms(string sourceFile, string suffix, IFileOperationsExecuter fileOps,
                                           HashSet<string> alreadyRun)
         {
             if (!suffix.EndsWith(".config", StringComparison.OrdinalIgnoreCase))
@@ -114,6 +128,21 @@ namespace IsobarExtension.Actions
                 return list;
             }
             return Directory.EnumerateFiles(parentDirectoryPath, "*", SearchOption.AllDirectories);
+        }
+
+        private IEnumerable<string> GetSuffixes(string suffixes)
+        {
+            if (String.IsNullOrWhiteSpace(suffixes))
+            {
+                return new string[0];
+            }
+
+            return
+                (from s in suffixes.Split(new char[] {','}) 
+                 select s.Trim() into s 
+                 where s.Length > 0 
+                 select s)
+                    .ToArray<string>();
         }
     }
 }
