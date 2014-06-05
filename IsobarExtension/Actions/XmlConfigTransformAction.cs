@@ -122,9 +122,6 @@ namespace IsobarExtension.Actions
         /// <returns>An argument string</returns>
         private string BuildArguments(string sourceFile, string transformFile)
         {
-            if(Verbose)
-                LogInformation("Destination file: " + Path.Combine(Context.TargetDirectory, sourceFile));
-
             var buffer = new StringBuilder();
             buffer.AppendFormat("source:\"{0}\"", Path.Combine(Context.SourceDirectory, sourceFile));
             buffer.AppendFormat(" transform:\"{0}\"", Path.Combine(Context.SourceDirectory, transformFile));
