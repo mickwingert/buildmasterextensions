@@ -125,7 +125,7 @@ namespace IsobarExtension.Actions
             var buffer = new StringBuilder();
             buffer.AppendFormat("source:\"{0}\"", Path.Combine(Context.SourceDirectory, sourceFile));
             buffer.AppendFormat(" transform:\"{0}\"", Path.Combine(Context.SourceDirectory, transformFile));
-            buffer.AppendFormat(" destination:\"{0}\"", Path.Combine(Context.SourceDirectory, sourceFile));
+            buffer.AppendFormat(" destination:\"{0}\"", Path.Combine(Context.TargetDirectory, sourceFile));
             buffer.Append(" indent");
 
             if (PreserveWhitespace)
